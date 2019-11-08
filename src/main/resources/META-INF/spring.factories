@@ -1,0 +1,2 @@
+org.springframework.boot.autoconfigure.EnableAutoConfiguration=\
+cn.isuyu.baidu.face.h5.liveness.config.FaceChkAutoConfiguration
