@@ -23,7 +23,6 @@ import java.util.Map;
  * @GitHub https://github.com/niezhiliang
  * @Date 2019-11-08 3:42 下午
  */
-@Service
 public class FaceChkServiceImpl implements FaceChkService {
 
     @Autowired
