@@ -22,4 +22,9 @@ public class FaceChkDTO implements Serializable {
      * 视频文件的base64
      */
     private String video_base64;
+
+    /**
+     * 请求的access_token
+     */
+    private String access_token;
 }

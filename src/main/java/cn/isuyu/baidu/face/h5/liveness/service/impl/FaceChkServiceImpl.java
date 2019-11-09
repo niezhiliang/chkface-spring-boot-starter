@@ -9,10 +9,13 @@ import cn.isuyu.baidu.face.h5.liveness.vos.FaceVO;
 import cn.isuyu.baidu.face.h5.liveness.vos.ResultTokenVO;
 import cn.isuyu.baidu.face.h5.liveness.vos.ResultVO;
 import com.alibaba.fastjson.JSONObject;
+import com.alibaba.fastjson.TypeReference;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.io.IOException;
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * @Author NieZhiLiang
@@ -35,13 +38,20 @@ public class FaceChkServiceImpl implements FaceChkService {
         return JSONObject.parseObject(result,ResultTokenVO.class);
     }
 
-    public ResultVO<CodeVO> getCode() {
-
-        return null;
+    public ResultVO<CodeVO> getCode(String accessToken) throws IOException {
+        Map<String,String> params = new HashMap<String,String>(1);
+        params.put("access_token",accessToken);
+        String result = OkHttp.formPost(faceChkProperties.getUrlCode(),params);
+        return JSONObject.parseObject(result,new TypeReference<ResultVO<CodeVO>>(){});
     }
 
-    public ResultVO<FaceVO> getFaceResult(FaceChkDTO faceChkDTO) {
-        return null;
+    public ResultVO<FaceVO> getFaceResult(FaceChkDTO faceChkDTO) throws IOException {
+        Map<String,String> params = new HashMap<String,String>(3);
+        params.put("session_id",faceChkDTO.getSession_id());
+        params.put("video_base64",faceChkDTO.getVideo_base64());
+        params.put("access_token",faceChkDTO.getAccess_token());
+        String result = OkHttp.formPost(faceChkProperties.getUrlFace(),params);
+        return JSONObject.parseObject(result,new TypeReference<ResultVO<FaceVO>>(){});
     }
 
 

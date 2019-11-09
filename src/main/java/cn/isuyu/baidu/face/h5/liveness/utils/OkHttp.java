@@ -1,8 +1,8 @@
 package cn.isuyu.baidu.face.h5.liveness.utils;
 
-
 import okhttp3.*;
 
+import java.io.File;
 import java.io.IOException;
 import java.util.Map;
 
@@ -36,7 +36,7 @@ public class OkHttp {
                 .build();
 
         Response response = okHttpClient.newCall(request).execute();
-        return response.toString();
+        return response.body().string();
     }
 
     /**
@@ -74,4 +74,35 @@ public class OkHttp {
         return response.body().string();
     }
 
+    /**
+     * 文件上传
+     * @param url
+     * @param params
+     * @param file
+     * @return
+     * @throws IOException
+     */
+    public static String fileUpload(String url, Map<String,String> params ,File file) throws IOException {
+        OkHttpClient client = new OkHttpClient();
+
+        MediaType MEDIA_TYPE_PNG = MediaType.parse("image/png");
+        RequestBody filebody = MultipartBody.create(MEDIA_TYPE_PNG, file);
+        MultipartBody.Builder multiBuilder = new MultipartBody.Builder();
+        //这里是 封装上传图片参数
+        multiBuilder.addFormDataPart("data", file.getName(), filebody);
+        for (String key : params.keySet()) {
+            multiBuilder.addFormDataPart(key,params.get(key));
+        }
+        //参数以添加header方式将参数封装，否则上传参数为空
+        // 设置请求体
+        multiBuilder.setType(MultipartBody.FORM);
+
+        RequestBody body = multiBuilder.build();
+        Request request = new Request.Builder()
+                .url(url)
+                .post(body)
+                .build();
+        Response response = client.newCall(request).execute();
+        return response.body().string();
+    }
 }

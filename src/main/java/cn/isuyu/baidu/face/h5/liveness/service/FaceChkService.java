@@ -20,11 +20,11 @@ public interface FaceChkService {
     ResultTokenVO getAccertToken() throws IOException;
 
     /**获取验证码**/
-    ResultVO<CodeVO> getCode();
+    ResultVO<CodeVO> getCode(String accessToken) throws IOException;
 
     /**
      * 获取活体检测的结果
      * @return
      */
-    ResultVO<FaceVO> getFaceResult(FaceChkDTO faceChkDTO);
+    ResultVO<FaceVO> getFaceResult(FaceChkDTO faceChkDTO) throws IOException;
 }
