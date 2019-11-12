@@ -13,6 +13,7 @@ import java.io.Serializable;
 @Data
 public class PicVO implements Serializable {
 
+    private static final long serialVersionUID = 5890072992205389428L;
     /**
      * face唯一ID
      */

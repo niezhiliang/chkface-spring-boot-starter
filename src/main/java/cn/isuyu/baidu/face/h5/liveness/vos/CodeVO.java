@@ -13,6 +13,8 @@ import java.io.Serializable;
 @Data
 public class CodeVO implements Serializable {
 
+    private static final long serialVersionUID = 7104370035926637549L;
+
     private String session_id;
 
     private String code;

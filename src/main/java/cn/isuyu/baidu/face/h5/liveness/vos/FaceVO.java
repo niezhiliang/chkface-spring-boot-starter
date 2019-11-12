@@ -14,6 +14,7 @@ import java.util.List;
 @Data
 public class FaceVO implements Serializable {
 
+    private static final long serialVersionUID = 4204133080529593709L;
     /**
      * 活体检测分数。此分数为视频分析结果，
      * 不包含语音验证结果，语音验证

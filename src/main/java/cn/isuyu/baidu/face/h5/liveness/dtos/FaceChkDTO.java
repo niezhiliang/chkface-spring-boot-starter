@@ -1,6 +1,7 @@
 package cn.isuyu.baidu.face.h5.liveness.dtos;
 
 import lombok.Data;
+import lombok.experimental.Accessors;
 
 import java.io.Serializable;
 
@@ -11,7 +12,10 @@ import java.io.Serializable;
  * @Date 2019-11-08 5:48 下午
  */
 @Data
+@Accessors(chain = true)
 public class FaceChkDTO implements Serializable {
+
+    private static final long serialVersionUID = -4050959899367643566L;
 
     /**
      * 短信验证码的sessionId

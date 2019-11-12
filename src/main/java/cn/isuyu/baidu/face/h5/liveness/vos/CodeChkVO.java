@@ -13,6 +13,7 @@ import java.io.Serializable;
 @Data
 public class CodeChkVO implements Serializable {
 
+    private static final long serialVersionUID = -2204931996397646081L;
     /**
      * 预先保存的验证码
      */

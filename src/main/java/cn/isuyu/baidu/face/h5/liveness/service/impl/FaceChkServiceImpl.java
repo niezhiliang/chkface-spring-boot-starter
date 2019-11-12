@@ -11,7 +11,6 @@ import cn.isuyu.baidu.face.h5.liveness.vos.ResultVO;
 import com.alibaba.fastjson.JSONObject;
 import com.alibaba.fastjson.TypeReference;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
 
 import java.io.IOException;
 import java.util.HashMap;

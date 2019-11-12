@@ -13,6 +13,8 @@ import java.io.Serializable;
 @Data
 public class ResultVO<T> implements Serializable {
 
+    private static final long serialVersionUID = -7615324318362839122L;
+
     private String err_no;
 
     private String err_msg;
