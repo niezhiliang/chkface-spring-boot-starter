@@ -75,6 +75,20 @@ public class OkHttp {
     }
 
     /**
+     * post返回Response
+     * @param url
+     * @param json
+     * @return
+     * @throws IOException
+     */
+    public static Response Post(String url, String json) throws IOException {
+        OkHttpClient client = new OkHttpClient();
+        RequestBody body = RequestBody.create(MediaType.parse("application/json; charset=utf-8"), json);
+        Request request = (new okhttp3.Request.Builder()).url(url).post(body).build();
+        return client.newCall(request).execute();
+    }
+
+    /**
      * 文件上传
      * @param url
      * @param params
