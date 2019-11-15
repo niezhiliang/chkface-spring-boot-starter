@@ -43,10 +43,15 @@ public class FaceChkServiceImpl implements FaceChkService {
         params.put("access_token",accessToken);
         String result = OkHttp.formPost(faceChkProperties.getUrlCode(),params);
         JSONObject resultJson = JSONObject.parseObject(result);
-        if (resultJson.getJSONArray("result").isEmpty()) {
-            resultJson.put("result",null);
+        try {
+            if (resultJson.getJSONArray("result").isEmpty()) {
+                resultJson.put("result",null);
+                result = resultJson.toJSONString();
+            }
+        } catch (Exception e) {
+
         }
-        return JSONObject.parseObject(resultJson.toJSONString(),new TypeReference<ResultVO<CodeVO>>(){});
+        return JSONObject.parseObject(result,new TypeReference<ResultVO<CodeVO>>(){});
     }
 
     @Override
@@ -57,10 +62,16 @@ public class FaceChkServiceImpl implements FaceChkService {
         params.put("access_token",faceChkDTO.getAccess_token());
         String result = OkHttp.formPost(faceChkProperties.getUrlFace(),params);
         JSONObject resultJson = JSONObject.parseObject(result);
-        if (resultJson.getJSONArray("result").isEmpty()) {
-            resultJson.put("result",null);
+        try {
+            if (resultJson.getJSONArray("result").isEmpty()) {
+                resultJson.put("result",null);
+                result = resultJson.toJSONString();
+            }
+        } catch (Exception e) {
+
         }
-        return JSONObject.parseObject(resultJson.toJSONString(),new TypeReference<ResultVO<FaceVO>>(){});
+
+        return JSONObject.parseObject(result,new TypeReference<ResultVO<FaceVO>>(){});
     }
 
 
