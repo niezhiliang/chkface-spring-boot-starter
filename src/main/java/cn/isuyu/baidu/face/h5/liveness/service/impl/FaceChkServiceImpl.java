@@ -27,7 +27,8 @@ public class FaceChkServiceImpl implements FaceChkService {
     @Autowired
     private FaceChkProperties faceChkProperties;
 
-    public ResultTokenVO getAccertToken() throws IOException {
+    @Override
+    public ResultTokenVO getAccessToken() throws IOException {
         StringBuffer stringBuffer = new StringBuffer(faceChkProperties.getUrlToken())
                 .append("?grant_type=client_credentials")
                 .append("&client_id=").append(faceChkProperties.getApikey())
@@ -36,20 +37,30 @@ public class FaceChkServiceImpl implements FaceChkService {
         return JSONObject.parseObject(result,ResultTokenVO.class);
     }
 
+    @Override
     public ResultVO<CodeVO> getCode(String accessToken) throws IOException {
         Map<String,String> params = new HashMap<String,String>(1);
         params.put("access_token",accessToken);
         String result = OkHttp.formPost(faceChkProperties.getUrlCode(),params);
-        return JSONObject.parseObject(result,new TypeReference<ResultVO<CodeVO>>(){});
+        JSONObject resultJson = JSONObject.parseObject(result);
+        if (resultJson.getJSONArray("result").isEmpty()) {
+            resultJson.put("result",null);
+        }
+        return JSONObject.parseObject(resultJson.toJSONString(),new TypeReference<ResultVO<CodeVO>>(){});
     }
 
+    @Override
     public ResultVO<FaceVO> getFaceResult(FaceChkDTO faceChkDTO) throws IOException {
         Map<String,String> params = new HashMap<String,String>(3);
         params.put("session_id",faceChkDTO.getSession_id());
         params.put("video_base64",faceChkDTO.getVideo_base64());
         params.put("access_token",faceChkDTO.getAccess_token());
         String result = OkHttp.formPost(faceChkProperties.getUrlFace(),params);
-        return JSONObject.parseObject(result,new TypeReference<ResultVO<FaceVO>>(){});
+        JSONObject resultJson = JSONObject.parseObject(result);
+        if (resultJson.getJSONArray("result").isEmpty()) {
+            resultJson.put("result",null);
+        }
+        return JSONObject.parseObject(resultJson.toJSONString(),new TypeReference<ResultVO<FaceVO>>(){});
     }
 
 

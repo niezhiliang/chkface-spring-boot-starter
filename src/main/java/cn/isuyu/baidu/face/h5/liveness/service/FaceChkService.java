@@ -17,7 +17,7 @@ import java.io.IOException;
 public interface FaceChkService {
 
     /** 获取accert_token **/
-    ResultTokenVO getAccertToken() throws IOException;
+    ResultTokenVO getAccessToken() throws IOException;
 
     /**获取验证码**/
     ResultVO<CodeVO> getCode(String accessToken) throws IOException;
