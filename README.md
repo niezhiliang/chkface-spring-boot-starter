@@ -6,7 +6,7 @@
         <dependency>
             <groupId>cn.isuyu.face.h5.chk</groupId>
             <artifactId>chkface-spring-boot-starter</artifactId>
-            <version>1.0.0</version>
+            <version>1.0.1</version>
         </dependency>
 ```
 #### 配置文件
@@ -26,7 +26,7 @@ baidu:
     private FaceChkService faceChkService;
 
      //获取请求的access_token
-     ResultTokenVO tokenVO = faceChkService.getAccertToken();
+     ResultTokenVO tokenVO = faceChkService.getAccessToken();
 
     //获取语音校验码
     ResultVO<CodeVO> resultVO = faceChkService.getCode(access_token);          
